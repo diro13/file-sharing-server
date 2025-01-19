@@ -1,0 +1,200 @@
+{
+    "info": {
+      "name": "Secure File Sharing System",
+      "_postman_id": "d2b0cf8e-1b27-456e-8a90-9c6b3267e2b5",
+      "description": "A collection of APIs for a secure file-sharing system between Ops and Client users.",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Ops User Login",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"ops_user@example.com\",\n  \"password\": \"ops_password\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:5000/ops/login",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "5000",
+            "path": ["ops", "login"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Ops File Upload",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{ops_token}}"
+            },
+            {
+              "key": "Content-Type",
+              "value": "multipart/form-data"
+            }
+          ],
+          "body": {
+            "mode": "formdata",
+            "formdata": [
+              {
+                "key": "file",
+                "type": "file",
+                "src": "/path/to/sample_file.pptx"
+              }
+            ]
+          },
+          "url": {
+            "raw": "http://localhost:5000/ops/upload",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "5000",
+            "path": ["ops", "upload"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Client User Sign Up",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"client_user@example.com\",\n  \"password\": \"client_password\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:5000/client/signup",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "5000",
+            "path": ["client", "signup"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Client Email Verify",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:5000/client/verify-email?token={{encrypted_token}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "5000",
+            "path": ["client", "verify-email"],
+            "query": [
+              {
+                "key": "token",
+                "value": "{{encrypted_token}}"
+              }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Client User Login",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"email\": \"client_user@example.com\",\n  \"password\": \"client_password\"\n}"
+          },
+          "url": {
+            "raw": "http://localhost:5000/client/login",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "5000",
+            "path": ["client", "login"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Client Download File",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{client_token}}"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:5000/client/download/{{filename}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "5000",
+            "path": ["client", "download", "{{filename}}"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Client List Files",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer {{client_token}}"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:5000/client/list-files",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "5000",
+            "path": ["client", "list-files"]
+          }
+        },
+        "response": []
+      }
+    ],
+    "variable": [
+      {
+        "key": "ops_token",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "key": "client_token",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "key": "encrypted_token",
+        "value": "",
+        "type": "string"
+      },
+      {
+        "key": "filename",
+        "value": "",
+        "type": "string"
+      }
+    ]
+  }
+  
